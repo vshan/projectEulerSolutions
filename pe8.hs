@@ -1,6 +1,10 @@
--- kill me now please 
-elevSum :: [Char] -> [Int]
-elevSum (x:xs) =
-  let elevn = map (\x -> read [x] :: Int) ([x] ++ take 12 xs)
-  in (elevSum xs):(sum elevn):[]   
+import Data.Char
+import Data.List
 
+prodSeries contents  =
+  maximum . map (product) . foldr (zipWith (:)) (repeat []) . take 13
+  . tails . map (fromIntegral . digitToInt) . concat . lines $ contents
+
+main = do 
+  text <- readFile "number.txt"
+  print $ prodSeries text
